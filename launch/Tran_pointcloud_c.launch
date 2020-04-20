@@ -1,0 +1,42 @@
+<launch>
+
+    <!--这里尽量不要出现中文路径-->
+    <!--pcd->bin->pcd会导致点云中多了一个点,目前还没有找到原因-->
+
+    <arg name="input_dir" default="/media/cyber-z/E/test/velodyne" /> 
+    <arg name="out_dir" default="/media/cyber-z/E/test/velodyne" /> 
+    <arg name="input_type_option" default="bin" />   <!--  bin/pcd/pub/tof   -->
+    <arg name="output_type_option" default="pcd" />  <!--  bin/pcd   -->    
+    <arg name="start_num" default="0" />     
+    <arg name="trans_count" default="8" />
+    <arg name="pub_topic" default="/driver/pandar/point_cloud" />
+    <arg name="tof_topic" default="/camera1/hd/image_depth_rect" />
+
+    
+    <arg name="cloud_type" default="XYZI" />      <!--  XYZ/XYZI  预留接口-->
+
+
+    <node pkg="pointcloud_transfer" type="tranc_c_node" name="tranc_c_node" output="screen">
+
+        <param name="input_dir_" type="string" value="$(arg input_dir)" />
+        <param name="out_dir_" type="string" value="$(arg out_dir)" />
+        <param name="input_type_option_" type="string" value="$(arg input_type_option)"/>
+        <param name="output_type_option_" type="string" value="$(arg output_type_option)" />
+        <param name="trans_count_" type="int" value="$(arg trans_count)" />
+        <param name="start_num_" type="int" value="$(arg start_num)" />
+        <param name="cloud_type_" type="string" value="$(arg cloud_type)" />
+        <param name="pub_topic_" type="string" value="$(arg pub_topic)" />
+        <param name="tof_topic_" type="string" value="$(arg tof_topic)" />
+        <param name="camera_cx" type="double" value="959.5" />
+        <param name="camera_cy" type="double" value="539.5" />
+        <param name="camera_fx" type="double" value="1081.3720703125" />
+        <param name="camera_fy" type="double" value="1081.3720703125" />
+
+    </node>
+
+    <!--<arg name="camera_cx" default="959.5" />
+    <arg name="camera_cy" default="539.5" />
+    <arg name="camera_fx" default="1081.3720703125" />
+    <arg name="camera_fy" default="1081.3720703125" />-->
+
+</launch>

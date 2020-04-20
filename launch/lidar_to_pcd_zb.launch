@@ -1,0 +1,11 @@
+<launch>
+
+    <arg name="in_cloud_topic" default="/driver/pandar/point_cloud" />
+    <arg name="out_pcd_dir" default="/media/cyber-z/E/Pedestrian detection/DL/DL-test/lidar/1122-2-XYZI" />
+
+    <node pkg="lidar_to_pcd" type="lidar_to_pcd_node" name="lidar_to_pcd_node" output="screen">
+        <param name="in_cloud_topic" type="str" value="$(arg in_cloud_topic)" />
+        <param name="out_pcd_dir" type="str" value="$(arg out_pcd_dir)" />
+
+    </node>
+</launch>

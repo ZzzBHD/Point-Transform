@@ -1,0 +1,35 @@
+<launch>
+
+    <!--这里尽量不要出现中文路径-->
+
+    <arg name="input_dir" default="/media/cyber-z/E/test/output" /> 
+    <arg name="out_dir" default="/media/cyber-z/E/test2" /> 
+    <arg name="output_type_option" default="pcd" />   <!--  bin/pcd  input类型为npy-->
+    <arg name="start_num" default="0" />  
+    <arg name="trans_count" default="8" />
+    <arg name="pub_topic" default="/test/pointcloud" />
+    <arg name="cloud_type" default="XYZI" />      <!--  XYZ/XYZI  预留接口-->
+    <arg name="loop" default="0" />
+    <arg name="crop_cloud" default="False" />     <!--如果是lidar_2d这种经过裁剪后的kitti数据,则设置为True-->
+
+    <node pkg="pointcloud_transfer" type="tranc_p2c_node" name="tranc_p2c_node" output="screen">
+        <param name="out_dir_" type="string" value="$(arg out_dir)" />
+        <param name="start_num_" type="int" value="$(arg start_num)" />
+        <param name="pub_topic_" type="string" value="$(arg pub_topic)" />
+        <param name="cloud_type_" type="string" value="$(arg cloud_type)" />
+        <param name="output_type_option_" type="string" value="$(arg output_type_option)" />
+    </node>
+
+
+    <node pkg="pointcloud_transfer" type="tranp_p2c_node.py" name="tranp_p2c_node" output="screen">
+        <param name="input_dir_" type="string" value="$(arg input_dir)" />
+        <param name="start_num_" type="int" value="$(arg start_num)" />
+        <param name="pub_topic_" type="string" value="$(arg pub_topic)" />
+        <param name="cloud_type_" type="string" value="$(arg cloud_type)" />
+        <param name="trans_count_" type="int" value="$(arg trans_count)" />
+        <param name="loop_" type="int" value="$(arg loop)" />
+        <param name="crop_cloud_" type="string" value="$(arg crop_cloud)" />
+    </node>
+
+
+</launch>

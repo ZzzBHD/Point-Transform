@@ -1,0 +1,20 @@
+<launch>
+
+    <arg name="input_dir" default="/media/cyber-z/E/Pedestrian detection/DL/DL-test/lidar/1122-1-XYZ" /> 
+    <arg name="input_type_option" default="pcd" />   <!--  bin/pcd/bag/tof   -->
+    <arg name="start_num" default="1" />     
+    <arg name="trans_count" default="301" />
+    <arg name="pub_topic" default="/test/pointcloud" />
+    <arg name="cloud_type" default="XYZ" />      <!--  XYZ/XYZI  预留接口-->
+    <arg name="loop" default="1" />
+
+    <node pkg="pointcloud_transfer" type="pubc_node" name="pubc_node" output="screen">
+        <param name="input_dir_" type="string" value="$(arg input_dir)" />
+        <param name="input_type_option_" type="string" value="$(arg input_type_option)"/>
+        <param name="trans_count_" type="int" value="$(arg trans_count)" />
+        <param name="start_num_" type="int" value="$(arg start_num)" />
+        <param name="pub_topic_" type="string" value="$(arg pub_topic)" />
+        <param name="cloud_type_" type="string" value="$(arg cloud_type)" />
+        <param name="loop_" type="int" value="$(arg loop)" />
+    </node>
+</launch>
